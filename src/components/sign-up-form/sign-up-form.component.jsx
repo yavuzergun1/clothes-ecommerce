@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-// import input from "../form-input/form-input.component";
+import FormInput from "../form-input/form-input.component";
 // import Button from "../button/button.component";
 
 import {
@@ -20,6 +20,7 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
@@ -33,13 +34,13 @@ const SignUpForm = () => {
     }
 
     try {
-      const {user} = await createAuthUserWithEmailAndPassword(
+      const { user } = await createAuthUserWithEmailAndPassword(
         email,
         password
       );
 
-     await createUserDocumentFromAuth(user, {displayName});
-      console.log(user);
+      await createUserDocumentFromAuth(user, { displayName });
+      resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         alert("Cannot create user, email already in use");
@@ -47,7 +48,6 @@ const SignUpForm = () => {
         console.log("user creation encountered an error", error);
       }
     }
-    resetFormFields();
   };
 
   const handleChange = (event) => {
@@ -55,12 +55,13 @@ const SignUpForm = () => {
 
     setFormFields({ ...formFields, [name]: value });
   };
+
   return (
     <div className="sign-up-container">
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
-        <input
+        <FormInput
           label="Display Name"
           type="text"
           required
@@ -69,7 +70,7 @@ const SignUpForm = () => {
           value={displayName}
         />
 
-        <input
+        <FormInput
           label="Email"
           type="email"
           required
@@ -78,7 +79,7 @@ const SignUpForm = () => {
           value={email}
         />
 
-        <input
+        <FormInput
           label="Password"
           type="password"
           required
@@ -87,7 +88,7 @@ const SignUpForm = () => {
           value={password}
         />
 
-        <input
+        <FormInput
           label="Confirm Password"
           type="password"
           required
