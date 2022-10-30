@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import {
   createAuthUserWithEmailAndPassword,
-  // createUserDocumentFromAuth,
+  createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
 
 import "./sign-up-form.styles.scss";
@@ -26,19 +26,22 @@ const SignUpForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-console.log(email);
-console.log(password);
+
     if (password !== confirmPassword) {
       alert("passwords do not match");
       return;
     }
 
     try {
-      const response = await createAuthUserWithEmailAndPassword(
+      const {user} = await createAuthUserWithEmailAndPassword(
         email,
         password
       );
-console.log(response);
+
+     await createUserDocumentFromAuth(user, {displayName});
+      console.log(user);
+      
+
       // await createUserDocumentFromAuth(user, { displayName });
       // resetFormFields();
     } catch (error) {
