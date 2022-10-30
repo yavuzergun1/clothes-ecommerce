@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
+// import input from "../form-input/form-input.component";
+// import Button from "../button/button.component";
 
 import {
   createAuthUserWithEmailAndPassword,
@@ -20,7 +20,7 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
-
+console.log(displayName);
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
@@ -55,13 +55,13 @@ const SignUpForm = () => {
 
     setFormFields({ ...formFields, [name]: value });
   };
-
+console.log(formFields);
   return (
     <div className="sign-up-container">
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
-        <FormInput
+        <input
           label="Display Name"
           type="text"
           required
@@ -70,7 +70,7 @@ const SignUpForm = () => {
           value={displayName}
         />
 
-        <FormInput
+        <input
           label="Email"
           type="email"
           required
@@ -79,7 +79,7 @@ const SignUpForm = () => {
           value={email}
         />
 
-        <FormInput
+        <input
           label="Password"
           type="password"
           required
@@ -88,7 +88,7 @@ const SignUpForm = () => {
           value={password}
         />
 
-        <FormInput
+        <input
           label="Confirm Password"
           type="password"
           required
@@ -96,7 +96,7 @@ const SignUpForm = () => {
           name="confirmPassword"
           value={confirmPassword}
         />
-        <Button type="submit">Sign Up</Button>
+        <button type="submit">Sign Up</button>
       </form>
     </div>
   );
