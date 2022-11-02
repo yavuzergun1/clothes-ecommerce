@@ -8,7 +8,7 @@ import {
 // import { useEffect } from "react";
 // import { getRedirectResult } from "firebase/auth";
 
-const SignIn = () => {
+const Authentication = () => {
   // async function redirectResultFunc() {
   //   const response = await getRedirectResult(auth);
   //   console.log(response);
@@ -37,4 +37,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Authentication;
