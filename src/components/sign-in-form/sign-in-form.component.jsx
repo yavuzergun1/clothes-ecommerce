@@ -1,5 +1,5 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { Alert } from "antd";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 
@@ -31,16 +31,19 @@ const SignInForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    
     try {
-      const {user} = await signInAuthUserWithEmailAndPassword(
+      const { user } = await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
       console.log(user);
+    } catch (error) {
+      alert("asad");
+    }
       resetFormFields();
-    } catch (error) {}
   };
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
