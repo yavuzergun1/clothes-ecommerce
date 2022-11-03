@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { Alert } from "antd";
+import { useState } from "react";
+import { message, Alert } from "antd";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
-
+import "antd/dist/antd.css";
 import {
   createUserDocumentFromAuth,
   signInWithGooglePopup,
@@ -28,10 +28,10 @@ const SignInForm = () => {
     const { user } = await signInWithGooglePopup();
     await createUserDocumentFromAuth(user);
   };
-
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+
     try {
       const { user } = await signInAuthUserWithEmailAndPassword(
         email,
@@ -39,11 +39,11 @@ const SignInForm = () => {
       );
       console.log(user);
     } catch (error) {
-      alert("asad");
-    }
-      resetFormFields();
-  };
+          message.error("Invalid Passwork or Email");
 
+    }
+    resetFormFields();
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
