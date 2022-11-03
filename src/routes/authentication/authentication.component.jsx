@@ -1,3 +1,4 @@
+import SignInForm from "../../components/sign-in-form/sign-in-form.component";
 import SignUpForm from "../../components/sign-up-form/sign-up-form.component";
 import {
   auth,
@@ -9,6 +10,8 @@ import {
 // import { getRedirectResult } from "firebase/auth";
 
 const Authentication = () => {
+
+  // SIGN IN BY GOOGLE REDIRECT (SIGNING IN A DIFFERENT PAGE, NOT POPUP)
   // async function redirectResultFunc() {
   //   const response = await getRedirectResult(auth);
   //   console.log(response);
@@ -20,16 +23,13 @@ const Authentication = () => {
   //   redirectResultFunc();
   // }, []);
 
-  const logGoogleUser = async () => {
-    const { user } = await signInWithGooglePopup();
-    const userDocRef = await createUserDocumentFromAuth(user);
-  };
+
 
   return (
     <div>
-      <div>signIn</div>
+      <div>signIn Page</div>
+      <SignInForm/>
       <SignUpForm />
-      <button onClick={logGoogleUser}>Sign in with Google Popup</button>
       <button onClick={signInWithGoogleRedirect}>
         Sign in with Google Redirect
       </button>
