@@ -28,7 +28,7 @@ const SignInForm = () => {
     const { user } = await signInWithGooglePopup();
     await createUserDocumentFromAuth(user);
   };
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -39,8 +39,17 @@ const SignInForm = () => {
       );
       console.log(user);
     } catch (error) {
-          message.error("Invalid Passwork or Email");
+      switch (error.code) {
+        case "auth/wrong-password":
+          message.error("Invalid Password");
+          break;
+        case "auth/user-not-found":
+          message.error("Invalid email");
+          break;
 
+        default:
+          console.log(error);
+      }
     }
     resetFormFields();
   };
@@ -75,7 +84,8 @@ const SignInForm = () => {
         />
         <div className="buttons-container">
           <Button type="submit">Sign In</Button>
-          <Button buttonType="google" onClick={signInWithGoogle}>
+          {/* we write type=button if we not it works also submiting function. we dont want it */}
+          <Button type="button" buttonType="google" onClick={signInWithGoogle}>
             Google Sign In
           </Button>
         </div>

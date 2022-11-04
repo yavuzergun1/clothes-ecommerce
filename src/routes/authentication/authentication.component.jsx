@@ -1,16 +1,11 @@
 import SignInForm from "../../components/sign-in-form/sign-in-form.component";
 import SignUpForm from "../../components/sign-up-form/sign-up-form.component";
-import {
-  auth,
-  signInWithGooglePopup,
-  signInWithGoogleRedirect,
-  createUserDocumentFromAuth,
-} from "../../utils/firebase/firebase.utils";
+import "./authentication.styles.scss";
+// import { signInWithGoogleRedirect } from "../../utils/firebase/firebase.utils";
 // import { useEffect } from "react";
 // import { getRedirectResult } from "firebase/auth";
 
 const Authentication = () => {
-
   // SIGN IN BY GOOGLE REDIRECT (SIGNING IN A DIFFERENT PAGE, NOT POPUP)
   // async function redirectResultFunc() {
   //   const response = await getRedirectResult(auth);
@@ -23,16 +18,14 @@ const Authentication = () => {
   //   redirectResultFunc();
   // }, []);
 
-
-
   return (
-    <div>
-      <div>signIn Page</div>
-      <SignInForm/>
+    <div className="authentication-container">
+      <SignInForm />
       <SignUpForm />
-      <button onClick={signInWithGoogleRedirect}>
+      {/* signin with google redirect button */}
+      {/* <button onClick={signInWithGoogleRedirect}>
         Sign in with Google Redirect
-      </button>
+      </button> */}
     </div>
   );
 };
