@@ -1,5 +1,8 @@
 import { createContext, useState, useEffect } from "react";
-import { onAuthStateChangeListener } from "../utils/firebase/firebase.utils";
+import {
+  onAuthStateChangeListener,
+  createUserDocumentFromAuth,
+} from "../utils/firebase/firebase.utils";
 
 export const UserContext = createContext({
   setCurrentUser: () => null,
@@ -11,8 +14,11 @@ export const UserProvider = ({ children }) => {
   const value = { currentUser, setCurrentUser };
 
   useEffect(() => {
-    onAuthStateChangeListener((user) => setCurrentUser(user));
+    onAuthStateChangeListener((user) => {
+      user && createUserDocumentFromAuth(user);
+      setCurrentUser(user);
+    });
   });
-  console.log("user",currentUser);
+  console.log("user", currentUser);
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
