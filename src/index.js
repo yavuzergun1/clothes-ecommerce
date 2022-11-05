@@ -1,4 +1,7 @@
 import React from "react";
+import ReactDOM from "react-dom/client";
+import reportWebVitals from "./reportWebVitals";
+
 import { render } from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 
@@ -7,9 +10,9 @@ import { UserProvider } from "./contexts/user.context";
 
 import "./index.scss";
 
-const rootElement = document.getElementById("root");
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-render(
+root.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
@@ -17,5 +20,7 @@ render(
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,
-  rootElement
+  
 );
+
+reportWebVitals();

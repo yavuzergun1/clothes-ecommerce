@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { message, Alert } from "antd";
+import { useState, useContext } from "react";
+import { message } from "antd";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 import "antd/dist/antd.css";
+import { UserContext } from "../../contexts/user.context";
 import {
   createUserDocumentFromAuth,
   signInWithGooglePopup,
@@ -19,6 +20,7 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+  const { setCurrentUser } = useContext(UserContext);
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -27,6 +29,7 @@ const SignInForm = () => {
   const signInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
     await createUserDocumentFromAuth(user);
+    setCurrentUser(user);
   };
 
   const handleSubmit = async (event) => {
@@ -37,6 +40,7 @@ const SignInForm = () => {
         email,
         password
       );
+      setCurrentUser(user);
       console.log(user);
     } catch (error) {
       switch (error.code) {
