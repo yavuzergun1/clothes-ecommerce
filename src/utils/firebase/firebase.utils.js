@@ -82,4 +82,5 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 
 export const signOutUser = async () => await signOut(auth);
 
+// this function provides us to watch user signed in or not
 export const onAuthStateChangeListener = (callback) => onAuthStateChanged(auth, callback);
