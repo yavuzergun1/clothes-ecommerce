@@ -28,12 +28,13 @@ googleProvider.setCustomParameters({
 });
 
 export const auth = getAuth();
-console.log(auth);
+console.log("auth",auth);
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
-  
+
 export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, googleProvider);
+
 export const db = getFirestore();
 
 export const createUserDocumentFromAuth = async (
@@ -43,7 +44,7 @@ export const createUserDocumentFromAuth = async (
   if (!user) return;
   // there are 3 things inside doc: database, collection, idetifier
   const userDocRef = doc(db, "users", user.uid);
-  // console.log("user", user);
+  console.log("user", user);
   // console.log("userDocRef", userDocRef);
 
   const userSnapShot = await getDoc(userDocRef);
@@ -51,7 +52,7 @@ export const createUserDocumentFromAuth = async (
 
   if (!userSnapShot.exists()) {
     const { displayName, email } = user;
-    const createdAt = new Date(); /* this'll whow as when was data set */
+    const createdAt = new Date(); /* this'll show as when was data set */
 
     try {
       await setDoc(userDocRef, {
@@ -84,4 +85,5 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 export const signOutUser = async () => await signOut(auth);
 
 // this function provides us to watch user signed in or not
-export const onAuthStateChangeListener = (callback) => onAuthStateChanged(auth, callback);
+export const onAuthStateChangeListener = (callback) =>
+  onAuthStateChanged(auth, callback);
