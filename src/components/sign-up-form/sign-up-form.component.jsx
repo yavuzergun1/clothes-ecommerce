@@ -39,8 +39,8 @@ const SignUpForm = () => {
         email,
         password
       );
-
-      await createUserDocumentFromAuth(user, { displayName });
+console.log(displayName);
+      await createUserDocumentFromAuth(user, {displayName} );
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
