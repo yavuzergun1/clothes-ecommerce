@@ -28,37 +28,38 @@ googleProvider.setCustomParameters({
 });
 
 export const auth = getAuth();
-console.log(auth);
+console.log("auth",auth);
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
 
 export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, googleProvider);
+
 export const db = getFirestore();
 
 export const createUserDocumentFromAuth = async (
   user,
-  additionalInformation = {},
+  additionalInformation = {}
 ) => {
   if (!user) return;
   // there are 3 things inside doc: database, collection, idetifier
   const userDocRef = doc(db, "users", user.uid);
-  // console.log("user", user);
+  console.log("user", user);
   // console.log("userDocRef", userDocRef);
-console.log(user);
+
   const userSnapShot = await getDoc(userDocRef);
   // console.log("isExist", userSnapShot.exists());
 
   if (!userSnapShot.exists()) {
-    const { email } = user;
-    const {displayName} = additionalInformation
-    const createdAt = new Date(); /* this'll whow as when was data set */
+    const { displayName, email } = user;
+    const createdAt = new Date(); /* this'll show as when was data set */
 
     try {
       await setDoc(userDocRef, {
         displayName,
         email,
         createdAt,
+        ...additionalInformation,
       });
     } catch (error) {
       console.log(error);

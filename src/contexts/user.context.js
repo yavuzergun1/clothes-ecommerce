@@ -13,12 +13,12 @@ export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const value = { currentUser, setCurrentUser };
 
-  useEffect(() => {
-    onAuthStateChangeListener((user) => {
-      user && createUserDocumentFromAuth(user);
-      setCurrentUser(user);
-    });
-  });
+  // useEffect(() => {
+  //   onAuthStateChangeListener((user) => {
+  //     user && createUserDocumentFromAuth(user);
+  //     setCurrentUser(user);
+  //   });
+  // });
   console.log("user", currentUser);
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
