@@ -44,9 +44,8 @@ export const createUserDocumentFromAuth = async (
   if (!user) return;
   // there are 3 things inside doc: database, collection, idetifier
   const userDocRef = doc(db, "users", user.uid);
-  console.log("user", user);
   // console.log("userDocRef", userDocRef);
-
+  
   const userSnapShot = await getDoc(userDocRef);
   // console.log("isExist", userSnapShot.exists());
 
@@ -64,6 +63,7 @@ export const createUserDocumentFromAuth = async (
     } catch (error) {
       console.log(error);
     }
+    console.log("user", user);
   }
   console.log("userDocref2", userDocRef);
   // if snapShot exist
@@ -85,5 +85,5 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 export const signOutUser = async () => await signOut(auth);
 
 // this function provides us to watch user signed in or not
-export const onAuthStateChangeListener = (callback) =>
+export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
