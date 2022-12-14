@@ -14,14 +14,15 @@ import "./sign-up-form.styles.scss";
 const defaultFormFields = {
   displayName: "",
   email: "",
+  phoneNumber:"",
+  adress: "",
   password: "",
   confirmPassword: "",
 };
 
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { displayName, email, password, confirmPassword } = formFields;
-
+  const { displayName, email, phoneNumber, adress, password, confirmPassword } = formFields;
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
@@ -39,7 +40,7 @@ const SignUpForm = () => {
         email,
         password
       );
-      await createUserDocumentFromAuth(user, {displayName} );
+      await createUserDocumentFromAuth(user, { displayName, adress, phoneNumber });
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
@@ -77,6 +78,22 @@ const SignUpForm = () => {
           onChange={handleChange}
           name="email"
           value={email}
+        />
+        <FormInput
+          label="Phone"
+          type="number"
+          required
+          onChange={handleChange}
+          name="phoneNumber"
+          value={phoneNumber}
+        />
+        <FormInput
+          label="Adress"
+          type="text"
+          required
+          onChange={handleChange}
+          name="adress"
+          value={adress}
         />
 
         <FormInput
