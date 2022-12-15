@@ -16,10 +16,13 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {
+      // Eğer user gelirse bu user yeni mi değil mi diye kontrol edip öyle atamak için createUserDocumentFromAuth'u çalıştırır
       if (user) {
         createUserDocumentFromAuth(user);
       }
+      // eğer user yoksa da direk curretn user'ı atar
       setCurrentUser(user);
+      console.log(user);
     });
     return unsubscribe;
   }, []);
