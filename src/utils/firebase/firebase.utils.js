@@ -9,7 +9,14 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC7jFUtKi1bj7n621yr9uqxD8l4C20NDaI",
@@ -28,7 +35,7 @@ googleProvider.setCustomParameters({
 });
 
 export const auth = getAuth();
-console.log("auth",auth);
+console.log("auth", auth);
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
 
@@ -36,6 +43,19 @@ export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
+
+export const addCollectionDocuments = async (collectionkey, objectsToAdd) => {
+  const collectionRef = collection(db, collectionkey);
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach((object) => {
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
+
+  await batch.commit();
+  console.log("done");
+};
 
 export const createUserDocumentFromAuth = async (
   user,
@@ -45,7 +65,7 @@ export const createUserDocumentFromAuth = async (
   // there are 3 things inside doc: database, collection, idetifier
   const userDocRef = doc(db, "users", user.uid);
   // console.log("userDocRef", userDocRef);
-  
+
   const userSnapShot = await getDoc(userDocRef);
   // console.log("isExist", userSnapShot.exists());
 
