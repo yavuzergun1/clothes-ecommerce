@@ -2,11 +2,11 @@ import { Fragment } from "react";
 import { useContext } from "react";
 import ProductCard from "../../components/product-card/product-card.component";
 import { CategoriesContext } from "../../contexts/categories.context";
-
 import "./shop.styles.scss";
 
 const Shop = () => {
   const { categories } = useContext(CategoriesContext);
+
   return (
     <Fragment>
       {/* Object değerlerini diziye çevirdik. sonra bunları map ile aldık. BÖYLECE TİTLE'LARI BİRER DİZİ ŞEKLİNDE ELDE ETTİK */}
