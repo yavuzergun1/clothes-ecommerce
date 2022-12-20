@@ -48,7 +48,8 @@ export const addCollectionDocuments = async (collectionkey, objectsToAdd) => {
   const collectionRef = collection(db, collectionkey);
   const batch = writeBatch(db);
 
-  objectsToAdd.forEach((object) => {
+  // VAR OLAN BİR JSON DOSYASINI FIREBASE'E ATMA
+  objectsToAdd.map((object) => {
     const docRef = doc(collectionRef, object.title.toLowerCase());
     batch.set(docRef, object);
   });
