@@ -17,7 +17,7 @@ const defaultFormFields = {
   password: "",
 };
 
-const SignInForm = () => {
+const LogInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
@@ -85,7 +85,7 @@ const SignInForm = () => {
           <Button type="submit">Sign In</Button>
           {/* we write type=button if we not it works also submiting function. we dont want it */}
           <Button type="button" buttonType="google" onClick={signInWithGoogle}>
-            Google Sign In
+            Contunie With Google
           </Button>
         </div>
       </form>
@@ -93,4 +93,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default LogInForm;
