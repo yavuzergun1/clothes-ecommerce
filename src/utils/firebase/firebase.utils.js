@@ -92,9 +92,6 @@ export const createUserDocumentFromAuth = async (
     try {
       await setDoc(userDocRef, {
         displayName,
-        email,
-        phoneNumber,
-        adress,
         createdAt,
         ...additionalInformation,
       });
