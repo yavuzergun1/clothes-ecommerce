@@ -17,13 +17,14 @@ const Navigation = () => {
       <NavigationContainer>
         <LogoContainer to="/">
           <CrwnLogo className="logo" />
+         
         </LogoContainer>
         <NavLinks>
           <NavLink to="/shop">SHOP</NavLink>
 
           {currentUser ? (
             // Navlink'in style özelliklerini alsın ama Link olarak değil de span olarak render edilsin istiyorsak "as=span" yazıyoruz
-            <NavLink as='span' onClick={signOutUser}>
+            <NavLink as="span" onClick={signOutUser}>
               {" "}
               SIGN OUT{" "}
             </NavLink>
