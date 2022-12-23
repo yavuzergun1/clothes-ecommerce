@@ -1,4 +1,4 @@
-import "./button.styles.scss";
+import "./button.styles.jsx";
 
 const BUTTON_TYPE_CLASSES = {
   google: "google-sign-in",
