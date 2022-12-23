@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const NavigationContainer = styled.div`
-  height: 170px;
+  height: 200px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -10,12 +10,11 @@ export const NavigationContainer = styled.div`
 `;
 
 export const LogoContainer = styled(Link)`
-  height: 220px;
-  width: 220px;
+  height: 120px;
+  width: 200px;
   padding: 25px;
-  img{
-  width:130%;
-    transform: translate(-80px, -70px)
+  img {
+    width: 100%;
   }
 `;
 
