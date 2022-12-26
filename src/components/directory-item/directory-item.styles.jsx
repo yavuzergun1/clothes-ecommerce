@@ -31,6 +31,7 @@ export const Body = styled.div`
     p {
       font-weight: lighter;
       font-size: 16px;
+    }
 `;
 export const DirectoryItemContainer = styled.div`
  min-width: 30%;
@@ -58,6 +59,8 @@ export const DirectoryItemContainer = styled.div`
 
   &:last-child {
     margin-left: 7.5px;
+  }
+}
 `;
 
 // .directory - item - container {
