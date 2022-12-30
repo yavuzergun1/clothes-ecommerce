@@ -46,11 +46,11 @@ export const signInWithGoogleRedirect = () =>
 
 export const db = getFirestore();
 
+// VAR OLAN BİR JSON DOSYASINI FIREBASE'E ATMA
 export const addCollectionDocuments = async (collectionkey, objectsToAdd) => {
   const collectionRef = collection(db, collectionkey);
   const batch = writeBatch(db);
 
-  // VAR OLAN BİR JSON DOSYASINI FIREBASE'E ATMA
   objectsToAdd.map((object) => {
     const docRef = doc(collectionRef, object.title.toLowerCase());
     batch.set(docRef, object);
@@ -60,6 +60,7 @@ export const addCollectionDocuments = async (collectionkey, objectsToAdd) => {
   console.log("done");
 };
 
+// FIRESTORE'DAN VERİ ÇEKME
 export const getCategoriesAndDocuments = async () => {
   const collectionRef = collection(db, "categories");
   const q = query(collectionRef);
