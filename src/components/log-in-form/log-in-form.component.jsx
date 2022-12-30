@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { message } from "antd";
 import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
+import Button, {BUTTON_TYPE_CLASSES} from "../button/button.component";
 import "antd/dist/antd.css";
 import { UserContext } from "../../contexts/user.context";
 import {
@@ -17,7 +17,7 @@ const defaultFormFields = {
   password: "",
 };
 
-const LogInForm = () => {
+const LogInForm = () => { 
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
@@ -84,7 +84,7 @@ const LogInForm = () => {
         <div className="buttons-container">
           <Button type="submit">Sign In</Button>
           {/* we write type=button if we not it works also submiting function. we dont want it */}
-          <Button type="button" buttonType="google" onClick={signInWithGoogle}>
+          <Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle}>
             Contunie With Google
           </Button>
         </div>
