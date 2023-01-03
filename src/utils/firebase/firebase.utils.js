@@ -14,7 +14,7 @@ import {
   doc,
   getDoc,
   setDoc,
- collection,
+  collection,
   writeBatch,
   query,
   getDocs,
@@ -68,6 +68,7 @@ export const getCategoriesAndDocuments = async () => {
   const querySnapShot = await getDocs(q);
   const categoryMap = querySnapShot.docs.reduce((acc, docSnapShot) => {
     const { title, items } = docSnapShot.data();
+    console.log(docSnapShot.data());
     acc[title.toLowerCase()] = items;
     return acc;
   }, {});
