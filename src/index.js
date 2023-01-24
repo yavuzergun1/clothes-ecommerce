@@ -8,6 +8,8 @@ import { UserProvider } from "./contexts/user.context";
 import { CategoriesProvider } from "./contexts/categories.context";
 import { CartProvider } from "./contexts/cart.context";
 import "./index.scss";
+import { stripePromise } from "./utils/stripe/stripe.utils";
+import { Elements } from "@stripe/react-stripe-js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -17,7 +19,9 @@ root.render(
       <UserProvider>
         <CategoriesProvider>
           <CartProvider>
-            <App />
+            <Elements stripe={stripePromise}>
+              <App />
+            </Elements>
           </CartProvider>
         </CategoriesProvider>
       </UserProvider>
