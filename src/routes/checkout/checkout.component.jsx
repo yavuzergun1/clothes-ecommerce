@@ -1,10 +1,6 @@
 import { useContext } from "react";
-
 import { CartContext } from "../../contexts/cart.context";
-
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
-
-import "./checkout.styles.jsx";
 import { PaymentForm } from "../../payment-form/payment-form.component";
 import { CheckoutContainer, CheckoutHeader, HeaderBlock } from "./checkout.styles.jsx";
 
@@ -37,7 +33,8 @@ const Checkout = () => {
         <div className="header-block"></div>
         <div className="header-block"></div>
         <div className="header-block"></div>
-        </CheckoutHeader>
+      </CheckoutHeader>
+      
         {cartItems.map((cartItem) => (
           <CheckoutItem key={cartItem.id} cartItem={cartItem} />
         ))}
