@@ -1,5 +1,5 @@
 Tech Stack:
-React
+ReactJS
 
 Dependecies:
 
