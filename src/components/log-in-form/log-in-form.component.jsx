@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { message } from "antd";
 import FormInput from "../form-input/form-input.component";
-import Button, {BUTTON_TYPE_CLASSES} from "../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import "antd/dist/antd.css";
 import { UserContext } from "../../contexts/user.context";
 import {
@@ -11,32 +11,30 @@ import {
 } from "../../utils/firebase/firebase.utils";
 
 import "./sign-in-form.styles.scss";
+import { useNavigate } from "react-router";
 
 const defaultFormFields = {
   email: "",
   password: "",
 };
 
-const LogInForm = () => { 
+const LogInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-
+  const navigate = useNavigate();
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
   const signInWithGoogle = async () => {
-   await signInWithGooglePopup();
+    await signInWithGooglePopup();
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-    await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
+      await signInAuthUserWithEmailAndPassword(email, password);
     } catch (error) {
       switch (error.code) {
         case "auth/wrong-password":
@@ -51,6 +49,7 @@ const LogInForm = () => {
       }
     }
     resetFormFields();
+    navigate("/");
   };
 
   const handleChange = (event) => {
@@ -84,7 +83,11 @@ const LogInForm = () => {
         <div className="buttons-container">
           <Button type="submit">Sign In</Button>
           {/* we write type=button if we not it works also submiting function. we dont want it */}
-          <Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle}>
+          <Button
+            type="button"
+            buttonType={BUTTON_TYPE_CLASSES.google}
+            onClick={signInWithGoogle}
+          >
             Contunie With Google
           </Button>
         </div>

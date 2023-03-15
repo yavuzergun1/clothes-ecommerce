@@ -68,7 +68,6 @@ export const getCategoriesAndDocuments = async () => {
   const querySnapShot = await getDocs(q);
   const categoryMap = querySnapShot.docs.reduce((acc, docSnapShot) => {
     const { title, items } = docSnapShot.data();
-    console.log(docSnapShot.data());
     acc[title.toLowerCase()] = items;
     return acc;
   }, {});
@@ -76,31 +75,33 @@ export const getCategoriesAndDocuments = async () => {
 };
 
 export const createUserDocumentFromAuth = async (
-  user,
+  userAuth,
   additionalInformation = {}
 ) => {
-  if (!user) return;
-  // there are 3 things inside doc: database, collection, idetifier
-  const userDocRef = doc(db, "users", user.uid);
+  console.log("FIRSTADD",additionalInformation);
+  // there are 3 things inside doc: database, collection, identifier
+  const userDocRef = doc(db, "users", userAuth.uid);
   // console.log("userDocRef", userDocRef);
 
   const userSnapShot = await getDoc(userDocRef);
   // console.log("isExist", userSnapShot.exists());
 
   if (!userSnapShot.exists()) {
-    const { displayName, email, phoneNumber, adress } = user;
+    const { displayName, email } = userAuth;
+    console.log(displayName);
     const createdAt = new Date(); /* this'll show as when was data set */
-
     try {
       await setDoc(userDocRef, {
         displayName,
+        email,
         createdAt,
         ...additionalInformation,
       });
+      console.log("ADDITIONALINFO", additionalInformation);
     } catch (err) {
       console.log(err);
     }
-    console.log("user", user);
+    console.log("user", userAuth);
   }
   console.log("userDocref2", userDocRef);
   // if snapShot exist
