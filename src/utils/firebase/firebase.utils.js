@@ -74,11 +74,11 @@ export const getCategoriesAndDocuments = async () => {
   return categoryMap;
 };
 
-export const getUserData = async () => {
-  const docRef = doc(db, "users", auth.currentUser.uid);
+export const getUserData = async (uid) => {
+  const docRef = doc(db, "users", uid);
   const docSnap = await getDoc(docRef);
   const data = docSnap.data();
-  console.log(data);
+  console.log("UTİLS USER DATA",data);
   return data;
 };
 

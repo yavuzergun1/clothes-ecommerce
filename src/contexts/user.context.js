@@ -5,7 +5,6 @@ import {
   createUserDocumentFromAuth,
   getUserData,
 } from "../utils/firebase/firebase.utils";
-import { getAuth } from "@firebase/auth";
 
 export const UserContext = createContext({
   setCurrentUser: () => null,
@@ -13,8 +12,8 @@ export const UserContext = createContext({
 });
 
 export const UserProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [userData, setUserData] = useState(null);
+  const [currentUser, setCurrentUser] = useState();
+  const [userData, setUserData] = useState();
   const value = { currentUser, setCurrentUser, userData, setUserData };
 
   useEffect(() => {
@@ -32,14 +31,14 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const getGoogleUserData = async () => {
-      if (currentUser) {
         const user = await getUserData(currentUser.uid);
         setUserData(user);
-      }
+      
     };
+    currentUser &&
     getGoogleUserData();
   }, [currentUser]);
-  console.log(userData);
+  console.log("context user data",userData);
   console.log("Current User", currentUser);
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

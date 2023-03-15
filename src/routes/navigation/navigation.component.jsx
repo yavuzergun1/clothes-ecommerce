@@ -18,6 +18,7 @@ const Navigation = () => {
   const { userData } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
   console.log(userData);
+  
   return (
     <Fragment>
       <NavigationContainer>
