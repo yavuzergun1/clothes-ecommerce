@@ -19,6 +19,7 @@ import {
   query,
   getDocs,
 } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC7jFUtKi1bj7n621yr9uqxD8l4C20NDaI",
@@ -111,12 +112,15 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
   return await createUserWithEmailAndPassword(auth, email, password);
+
 };
 
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+  
   if (!email || !password) return;
-
+  
   return await signInWithEmailAndPassword(auth, email, password);
+
 };
 
 export const signOutUser = async () => await signOut(auth);
