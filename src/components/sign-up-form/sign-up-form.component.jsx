@@ -1,29 +1,28 @@
 import { useState } from "react";
-
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
-
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
 
 import "./sign-up-form.styles.scss";
+import { useNavigate } from "react-router";
 
 const defaultFormFields = {
   displayName: "",
   email: "",
   phoneNumber: "",
-  adress: "",
+  address: "",
   password: "",
   confirmPassword: "",
 };
 
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { displayName, email, phoneNumber, adress, password, confirmPassword } =
+  const { displayName, email, phoneNumber, address, password, confirmPassword } =
     formFields;
-
+  const navigate= useNavigate()
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
@@ -41,13 +40,13 @@ const SignUpForm = () => {
         email,
         password
       );
-      
-      await createUserDocumentFromAuth(user, {
-        displayName,
-        adress,
-        phoneNumber,
-      });
+        await createUserDocumentFromAuth(user, {
+          displayName,
+          address,
+          phoneNumber,
+        });
       resetFormFields();
+      navigate("/");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         alert("Cannot create user, email already in use");
@@ -94,12 +93,12 @@ const SignUpForm = () => {
           value={phoneNumber}
         />
         <FormInput
-          label="Adress"
+          label="Address"
           type="text"
           required
           onChange={handleChange}
-          name="adress"
-          value={adress}
+          name="address"
+          value={address}
         />
 
         <FormInput
