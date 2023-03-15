@@ -25,8 +25,9 @@ const Navigation = () => {
           <img src={require("../../assets/E-Commerce (2).gif")} alt="" />
         </LogoContainer>
         <NavLinks>
+          {currentUser &&
           <div>Hello {userData?.displayName}!</div>
-
+}
           <NavLink to="/shop">SHOP</NavLink>
 
           {currentUser ? (
